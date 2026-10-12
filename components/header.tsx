@@ -39,8 +39,8 @@ export default function Header() {
           <ul className="flex flex-col gap-6 text-center font-semibold text-lg text-black absolute top-17 left-0 w-full bg-[#f8e9c9] z-10">
            <Link href="/">Home</Link>
            <Link href="/menu">Menu</Link>
-           <Link href="/about">About Us</Link>
-           <Link href="/contact">Contact</Link>
+           <Link href="/">About Us</Link>
+           <Link href="/">Contact</Link>
            <Link href="/cart">Cart</Link>
           </ul>
         </nav>

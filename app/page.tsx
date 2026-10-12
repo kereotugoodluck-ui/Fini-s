@@ -117,7 +117,7 @@ export default function Page() {
           <span className="italic font-serif text-[#D3732B] text-lg tracking-wider">
             OUR STORY
           </span>
-          <div className="h-[1px] w-12 bg-[#D3732B]"></div>
+          <div className="h-[px] w-12 bg-[#D3732B]"></div>
         </div>
 
         <h2 className="text-3xl font-bold text-black leading-tight">

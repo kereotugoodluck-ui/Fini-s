@@ -4,26 +4,35 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-// Main Dishes data as specified
+// Main Dishes data using local image paths from your laptop
 const MAIN_DISHES = [
   { id: 1, name: "Vegetable Soup", desc: "Fresh green vegetable soup with rich spices and seasoning.", price: 5000, img: "/images/vegetable soup (Edikaikang).jpg" },
-  { id: 2, name: "Afang Soup", desc: "Traditional Efik soup made with shredded afang leaves and waterleaves.", price: 5000, img: "/images/afang soup.jpg" },
-  { id: 3, name: "Jollof Rice", desc: "Smoky party jollof rice served with chicken or turkey.", price: 8000, img: "/images/jollof rice.jpg" },
-  { id: 4, name: "BitterLeaf Soup", desc: "Authentic bitterleaf soup prepared with assorted meats and palm oil.", price: 5000, img: "/images/bitterleaf soup.jpg" },
-  { id: 5, name: "Banga Soup", desc: "Delicious palm nut fruit extract soup cooked with fresh fish and spices.", price: 5000, img: "/images/banga soup.jpg" },
-  { id: 6, name: "Egusi Soup", desc: "Melon seed soup cooked with assorted meat and vegetables.", price: 5000, img: "/images/egusi soup.jpg" },
+
+  { id: 2, name: "Afang Soup", desc: "Traditional Efik soup made with shredded afang leaves and waterleaves.", price: 5000, img: "/images/afang.jpg" },
+
+  { id: 3, name: "Jollof Rice", desc: "Smoky party jollof rice served with chicken or turkey.", price: 8000, img: "/images/jollof rice.png" },
+
+  { id: 4, name: "BitterLeaf Soup", desc: "Authentic bitterleaf soup prepared with assorted meats and palm oil.", price: 5000, img: "/images/Bitter leaf soup.jpg" },
+
+  { id: 5, name: "Banga Soup", desc: "Delicious palm nut fruit extract soup cooked with fresh fish and spices.", price: 5000, img: "/images/banga.png" },
+
+  { id: 6, name: "Egusi Soup", desc: "Melon seed soup cooked with assorted meat and vegetables.", price: 5000, img: "/images/egusi-soup.jpg" },
+
   { id: 7, name: "Fried Rice", desc: "Nigerian style fried rice loaded with mixed vegetables and liver.", price: 8000, img: "/images/fried rice.jpg" },
-  { id: 8, name: "Ogbono Soup", desc: "Draw seed soup cooked with rich stockfish, meat, and traditional seasoning.", price: 5000, img: "/images/ogbono soup.jpg" },
-  { id: 9, name: "Native Soup", desc: "Traditional local oil soup loaded with seafood and traditional spices.", price: 5000, img: "/images/native soup.jpg" },
-  { id: 10, name: "Pepper Soup", desc: "Hot and spicy broth loaded with choice of meat and aromatic herbs.", price: 6000, img: "/images/pepper soup.jpg" },
+
+  { id: 8, name: "Ogbono Soup", desc: "Draw seed soup cooked with rich stockfish, meat, and traditional seasoning.", price: 5000, img: "/images/Ogbono Soup.jpg" },
+
+  { id: 9, name: "Native Soup", desc: "Traditional local oil soup loaded with seafood and traditional spices.", price: 5000, img: "/images/native soup.png" },
+
+  { id: 10, name: "Pepper Soup", desc: "Hot and spicy broth loaded with choice of meat and aromatic herbs.", price: 6000, img: "/images/Catfish pepper soup.jpg"},
 ];
 
-// Extras data as specified
+// Extras data using local image paths
 const EXTRAS = [
   { id: 'e1', name: "Turkey", price: 6000, img: "/images/turkey.jpg" },
-  { id: 'e2', name: "Goat meat", price: 2000, img: "/images/goat meat.jpg" },
+  { id: 'e2', name: "Goat meat", price: 2000, img: "/images/goat meat (2).jpg" },
   { id: 'e3', name: "Cow meat", price: 2000, img: "/images/cow meat.jpg" },
-  { id: 'e4', name: "Coleslaw/Salad", price: 2000, img: "/images/coleslaw salad.jpg" },
+  { id: 'e4', name: "Coleslaw/Salad", price: 2000, img: "/images/Kitchens Diary.jpg" },
 ];
 
 export default function MenuPage() {
@@ -48,7 +57,6 @@ export default function MenuPage() {
   };
 
   const proceedToCart = () => {
-    // Combine items into an array format for your cart page storage/params
     const cartItems = [
       ...MAIN_DISHES.filter(item => cart[item.id]).map(item => ({ ...item, quantity: cart[item.id] })),
       ...EXTRAS.filter(item => cart[item.id]).map(item => ({ ...item, quantity: cart[item.id] }))
@@ -59,19 +67,18 @@ export default function MenuPage() {
       return;
     }
 
-    // Example saving to localStorage to pull in your cart page
     localStorage.setItem("finis_cart", JSON.stringify(cartItems));
-    router.push("/cart"); // Update to your target cart route path
+    router.push("/cart");
   };
 
   return (
     <div className="min-h-screen bg-[#F8F3E6] pb-16">
-
-
+      
+      {/* Header Banner Section */}
       <div className="relative w-full h-64 bg-zinc-900 overflow-hidden flex flex-col justify-center items-center text-center px-4">
         <div className="absolute inset-0 opacity-40">
           <Image 
-            src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&auto=format&fit=crop" 
+            src="/images/jollof.jpg" 
             alt="Menu Banner Background" 
             fill 
             className="object-cover"
@@ -101,12 +108,11 @@ export default function MenuPage() {
                 className="bg-white rounded-2xl overflow-hidden shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 <div>
-                  <div className="relative w-full h-48">
+                  <div className="relative w-full h-48 bg-gray-100">
                     <Image src={dish.img} alt={dish.name} fill className="object-cover" />
                   </div>
                   <div className="p-4 space-y-2">
                     <h3 className="text-xl font-bold text-[#D3732B]">{dish.name}</h3>
-                    {/* Rating stars graphic */}
                     <div className="text-amber-500 text-sm">★★★★★</div>
                     <p className="text-gray-600 text-xs leading-snug">{dish.desc}</p>
                     <p className="text-lg font-extrabold text-[#D3732B] pt-1">₦ {dish.price.toLocaleString()}</p>
@@ -165,7 +171,7 @@ export default function MenuPage() {
                   className="bg-white rounded-2xl overflow-hidden shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 >
                   <div>
-                    <div className="relative w-full h-40">
+                    <div className="relative w-full h-40 bg-gray-100">
                       <Image src={extra.img} alt={extra.name} fill className="object-cover" />
                     </div>
                     <div className="p-4 space-y-1 text-center">
