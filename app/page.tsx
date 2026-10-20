@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const FOOD_IMAGES = [
   "/images/jollof.jpg",
@@ -98,7 +99,7 @@ export default function Page() {
           </div>
 
           <div className="mt-8">
-            <button className="bg-[#E2762B] hover:bg-[#c9621b] text-white font-semibold py-3 px-6 rounded-full flex items-center justify-center gap-2 shadow-md transition-colors w-max">
+            <Link href="/menu" className="bg-[#E2762B] hover:bg-[#c9621b] text-white font-semibold py-3 px-6 rounded-full flex items-center justify-center gap-2 shadow-md transition-colors w-max">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 fill-current"
@@ -107,7 +108,7 @@ export default function Page() {
                 <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.46 3.9 3.43 4.38l-.43 7.62h2l-.43-7.62C9.54 12.9 11 11.12 11 9zm7-7c-2.21 0-4 1.79-4 4v7h2v9h2V2z" />
               </svg>
               <span>View Menu</span>
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -160,10 +161,10 @@ export default function Page() {
         </div>
 
         <div className="flex justify-end pt-2">
-          <button className="bg-[#E2762B] hover:bg-[#c9621b] text-white font-medium py-2.5 px-6 rounded-full flex items-center gap-2 shadow-md transition-colors">
+          <Link href="/about-us" className="bg-[#E2762B] hover:bg-[#c9621b] text-white font-medium py-2.5 px-6 rounded-full flex items-center gap-2 shadow-md transition-colors">
             <span>Learn More</span>
             <span className="text-lg">➔</span>
-          </button>
+          </Link>
         </div>
       </section>
 
@@ -199,10 +200,10 @@ export default function Page() {
         </div>
 
         <div className="flex justify-center pt-2">
-            <button className="bg-white hover:bg-gray-50 text-[#D3732B] font-bold py-4 px-8 rounded-2xl shadow-md transition-all duration-300 hover:scale-105 flex items-center gap-3 text-lg border border-[#D3732B]/20">
+            <Link href="/menu" className="bg-white hover:bg-gray-50 text-[#D3732B] font-bold py-4 px-8 rounded-2xl shadow-md transition-all duration-300 hover:scale-105 flex items-center gap-3 text-lg border border-[#D3732B]/20">
               <span>VIEW FULL MENU</span>
               <span className="text-xl">→</span>
-            </button>
+            </Link>
         </div>
       </section>
 

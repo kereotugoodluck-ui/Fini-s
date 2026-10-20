@@ -1,22 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   return (
     <div>
       <header className="w-full bg-[#f8e9c9] px-8 py-4 flex items-center justify-between">
-
-        <Image src="/fini_s_logo-preview.png" alt="" width={70} height={70} />
+        <Image src="/fini_s_logo-preview.png" alt="Fini's Kitchen Logo" width={70} height={70} />
 
         <button
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
-          className="flex flex-col justify-center items-center gap-2"
+          className="flex flex-col justify-center items-center gap-2 z-20"
         >
           {menuOpen ? (
             <>
@@ -31,17 +36,16 @@ export default function Header() {
             </>
           )}
         </button>
-
       </header>
 
       {menuOpen && (
         <nav className="bg-[#f8e9c9] px-8 py-6">
-          <ul className="flex flex-col gap-6 text-center font-semibold text-lg text-black absolute top-17 left-0 w-full bg-[#f8e9c9] z-10">
-           <Link href="/">Home</Link>
-           <Link href="/menu">Menu</Link>
-           <Link href="/">About Us</Link>
-           <Link href="/">Contact</Link>
-           <Link href="/cart">Cart</Link>
+          <ul className="flex flex-col gap-6 text-center font-semibold text-lg text-black top-17 left-0 w-full bg-[#f8e9c9] z-10 py-4">
+            <Link href="/">Home</Link>
+            <Link href="/menu">Menu</Link>
+            <Link href="/about-us">About Us</Link>
+            <Link href="/contact-us">Contact</Link>
+            <Link href="/cart">Cart</Link>
           </ul>
         </nav>
       )}

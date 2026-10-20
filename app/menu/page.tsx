@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-// Main Dishes data using local image paths from your laptop
 const MAIN_DISHES = [
   { id: 1, name: "Vegetable Soup", desc: "Fresh green vegetable soup with rich spices and seasoning.", price: 5000, img: "/images/vegetable soup (Edikaikang).jpg" },
 
@@ -27,7 +26,6 @@ const MAIN_DISHES = [
   { id: 10, name: "Pepper Soup", desc: "Hot and spicy broth loaded with choice of meat and aromatic herbs.", price: 6000, img: "/images/Catfish pepper soup.jpg"},
 ];
 
-// Extras data using local image paths
 const EXTRAS = [
   { id: 'e1', name: "Turkey", price: 6000, img: "/images/turkey.jpg" },
   { id: 'e2', name: "Goat meat", price: 2000, img: "/images/goat meat (2).jpg" },
@@ -37,7 +35,7 @@ const EXTRAS = [
 
 export default function MenuPage() {
   const router = useRouter();
-  // Cart state mapping item id -> quantity (1 to 5 plates)
+  
   const [cart, setCart] = useState<{ [key: string]: number }>( {});
 
   const handleQuantityChange = (id: string, delta: number) => {
@@ -50,7 +48,7 @@ export default function MenuPage() {
         delete copy[id];
         return copy;
       }
-      if (newQty > 5) return prev; // Max 5 plates limit check
+      if (newQty > 5) return prev;
 
       return { ...prev, [id]: newQty };
     });
@@ -73,8 +71,7 @@ export default function MenuPage() {
 
   return (
     <div className="min-h-screen bg-[#F8F3E6] pb-16">
-      
-      {/* Header Banner Section */}
+ 
       <div className="relative w-full h-64 bg-zinc-900 overflow-hidden flex flex-col justify-center items-center text-center px-4">
         <div className="absolute inset-0 opacity-40">
           <Image 
@@ -93,8 +90,7 @@ export default function MenuPage() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 pt-10">
-        
-        {/* ================= MAIN DISHES GRID ================= */}
+  
         <h2 className="text-2xl font-bold text-black mb-6 border-l-4 border-[#E2762B] pl-3">
           Main Dishes
         </h2>
@@ -119,7 +115,6 @@ export default function MenuPage() {
                   </div>
                 </div>
 
-                {/* Counter & Action Controls */}
                 <div className="p-4 pt-0">
                   {qty === 0 ? (
                     <button 
@@ -153,15 +148,13 @@ export default function MenuPage() {
           })}
         </div>
 
-
-        {/* ================= EXTRAS SECTION ================= */}
         <div className="mt-16 mb-8">
           <div className="flex items-center gap-2 mb-2">
             <span className="italic font-serif text-[#D3732B] text-xl tracking-wider">Extras</span>
             <div className="h-[1px] w-12 bg-[#D3732B]"></div>
           </div>
           <h2 className="text-3xl font-bold text-black mb-6">Complement Your Meal</h2>
-
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {EXTRAS.map((extra) => {
               const qty = cart[extra.id] || 0;
@@ -213,7 +206,6 @@ export default function MenuPage() {
           </div>
         </div>
 
-        {/* Floating Cart Proceed Checkout Action Bar */}
         {Object.keys(cart).length > 0 && (
           <div className="sticky bottom-6 mt-10 bg-zinc-900 text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between max-w-xl mx-auto z-50">
             <div>

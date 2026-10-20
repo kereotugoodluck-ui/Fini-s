@@ -22,7 +22,6 @@ export default function CartPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Load cart items from localStorage on mount
   useEffect(() => {
     const savedCart = localStorage.getItem("finis_cart");
     if (savedCart) {
@@ -34,19 +33,17 @@ export default function CartPage() {
     }
   }, []);
 
-  // Update quantity in state and localStorage
   const updateQuantity = (id: string | number, delta: number) => {
     const updated = cartItems
       .map((item) => {
         if (item.id === id) {
           const newQty = item.quantity + delta;
-          if (newQty > 5) return item; // Max 5 limit check
+          if (newQty > 5) return item;
           return { ...item, quantity: newQty };
         }
         return item;
       })
-      .filter((item) => item.quantity > 0); // Remove if quantity drops to 0
-
+      .filter((item) => item.quantity > 0); 
     setCartItems(updated);
     localStorage.setItem("finis_cart", JSON.stringify(updated));
   };
@@ -59,7 +56,7 @@ export default function CartPage() {
 
   // Calculate Subtotal
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const deliveryFee = cartItems.length > 0 ? 1500 : 0; // Fixed flat delivery fee example
+  const deliveryFee = cartItems.length > 0 ? 1500 : 0;
   const grandTotal = subtotal + (cartItems.length > 0 ? deliveryFee : 0);
 
   const handleCheckout = async (e: React.FormEvent) => {
@@ -85,7 +82,6 @@ export default function CartPage() {
         totalAmount: grandTotal,
       };
 
-      // Example backend API call to submit the order
       const backendUrl = process.env.NEXT_PUBLIC_URL || 'http://localhost:5000';
       const res = await fetch(`${backendUrl}/orders/checkout`, {
         method: "POST",
@@ -97,12 +93,11 @@ export default function CartPage() {
         throw new Error("Failed to place order.");
       }
 
-      // Clear cart on success
       localStorage.removeItem("finis_cart");
       alert("Order placed successfully! 🎉");
-      router.push("/"); // Redirect home or confirmation page
+      router.push("/"); 
     } catch (error) {
-      // Fallback if backend isn't linked yet so user gets confirmation feedback
+     
       alert("Order simulation successful! Thank you for ordering from Fini's Kitchen.");
       localStorage.removeItem("finis_cart");
       router.push("/");
@@ -138,8 +133,7 @@ export default function CartPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            
-            {/* Cart Items List */}
+
             <div className="md:col-span-7 space-y-4">
               <h2 className="text-xl font-bold text-gray-800">Selected Meals ({cartItems.length})</h2>
               
@@ -158,7 +152,6 @@ export default function CartPage() {
                       <p className="text-[#E2762B] font-bold">₦ {item.price.toLocaleString()}</p>
                     </div>
 
-                    {/* Quantity controls */}
                     <div className="flex flex-col items-end gap-2">
                       <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1 border">
                         <button 
@@ -188,7 +181,6 @@ export default function CartPage() {
               </div>
             </div>
 
-            {/* Checkout & Delivery Summary Form */}
             <div className="md:col-span-5 bg-white rounded-2xl p-6 shadow-md space-y-6 h-fit">
               <h2 className="text-xl font-bold text-gray-800">Order Summary</h2>
 
@@ -207,7 +199,6 @@ export default function CartPage() {
                 </div>
               </div>
 
-              {/* Delivery Details Form */}
               <form onSubmit={handleCheckout} className="space-y-4">
                 <h3 className="font-bold text-gray-800 text-sm">Delivery Information</h3>
 

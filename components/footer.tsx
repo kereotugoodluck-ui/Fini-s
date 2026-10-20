@@ -5,14 +5,14 @@ import Image from "next/image";
 export default function FooterPage() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-[#EAE3D2] py-8 px-4">
-      {/* Outer Container covering the full bottom section */}
+  
       <footer className="w-full max-w-md bg-white text-gray-800 py-12 px-6 rounded-3xl shadow-lg flex flex-col items-center space-y-8">
        
 
         <div className="flex flex-col items-center space-y-2 text-center">
           <div className="relative w-24 h-16">
             <Image
-              src="/fini_s_logo-preview.png" // Replace with your logo path or image URL
+              src="/fini_s_logo-preview.png" 
               alt="Fini's Kitchen Logo"
               fill
               className="object-contain"
